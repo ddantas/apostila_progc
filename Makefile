@@ -1,21 +1,21 @@
 
-FILENAME = icc
+FILENAME = progc
 
 
-dvi: icc.dvi
+dvi: $(FILENAME).dvi
 
-ps: icc.ps
+ps: $(FILENAME).ps
 
-all: icc.pdf
+all: $(FILENAME).pdf
 
-icc.ps: icc.dvi
+$(FILENAME).ps: $(FILENAME).dvi
 	dvips -o $(FILENAME).ps $(FILENAME).dvi
 
-icc.pdf: icc.ps
+$(FILENAME).pdf: $(FILENAME).ps
 	ps2pdf $(FILENAME).ps $(FILENAME).pdf
 	evince $(FILENAME).pdf
 
-icc.dvi: clean $(FILENAME).tex
+$(FILENAME).dvi: clean $(FILENAME).tex
 	echo "Running latex..."
 	latex $(FILENAME).tex
 	echo "Running makeindex..."

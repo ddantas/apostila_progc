@@ -13,6 +13,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english, brazil]{babel}
 
+%% toprule, midrule, bottomrule
+%% ddantas 18/09/2026
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{comment}
+
 \usepackage{listings}
 \lstset{
   language=C,                % choose the language of the code
@@ -31,6 +37,8 @@
 }
 
 %formatacao
+
+\newcommand{\PLACEHOLDER}{\underline}
 
 \newcommand{\TAB}{{\hspace*{1cm}}}
 \newcommand{\NEWLINE}{~\\}
@@ -66,6 +74,7 @@
 \newcommand{\CASE}{{\tt case}}
 
 \newcommand{\FOR}{{\tt for}}
+\newcommand{\DO}{{\tt do}}
 \newcommand{\WHILE}{{\tt while}}
 
 \newcommand{\BREAK}{{\tt break}}
@@ -96,6 +105,8 @@
 \newcommand{\GETS}{{\tt gets}}
 \newcommand{\FGETS}{{\tt fgets}}
 
+\newcommand{\GETCHAR}{{\tt getchar}}
+
 \newcommand{\FOPEN}{{\tt fopen}}
 \newcommand{\FCLOSE}{{\tt fclose}}
 
@@ -108,7 +119,7 @@
 
 
 
-\title{Notas de aula de Introdução à Ciência da Computação}
+\title{Notas de aula de COMP0512, Programação C - Programação em C}
 \author{Daniel Oliveira Dantas}
 \date{6 de novembro de 2013}
 \begin{document}
@@ -129,49 +140,49 @@
 %Capítulo: Introdução ao C
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{intro.tex}
+\input{01_intro.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Capítulo: Controle de fluxo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{flow.tex}
+\input{02_flow.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Capítulo: Indentação
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{indent.tex}
+\input{03_indent.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Capítulo: Entrada e saída
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{io.tex}
+\input{04_io.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Capítulo: Vetores
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{array.tex}
+\input{05_array.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Capítulo: Funções
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{function.tex}
+\input{06_function.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Capítulo: Exercícios
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{exercise.tex}
+\input{07_exercise.tex}
 
 
 
@@ -184,56 +195,56 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: pause.cpp
+%Seção: pause.c
 
-\section{pause.cpp}
+\section{pause.c}
 
-\lstinputlisting[caption=series.cpp]{src/pause.cpp}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: ascii.cpp
-
-\section{ascii.cpp}
-
-\lstinputlisting[caption=ascii.cpp]{src/ascii.cpp}
+\lstinputlisting[caption=series.c]{src/pause.c}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: dado.cpp
+%Seção: ascii.c
 
-\section{dado.cpp}
+\section{ascii.c}
 
-\lstinputlisting[caption=dado.cpp]{src/dado.cpp}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: primos.cpp
-
-\section{primos.cpp}
-
-\lstinputlisting[caption=series.cpp]{src/primos.cpp}
+\lstinputlisting[caption=ascii.c]{src/ascii.c}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: series.cpp
+%Seção: dado.c
 
-\section{series.cpp}
+\section{dado.c}
 
-\lstinputlisting[caption=series.cpp]{src/series.cpp}
+\lstinputlisting[caption=dado.c]{src/dado.c}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Seção: primos.c
+
+\section{primos.c}
+
+\lstinputlisting[caption=series.c]{src/primos.c}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Seção: series.c
+
+\section{series.c}
+
+\lstinputlisting[caption=series.c]{src/series.c}
 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: generate.cpp
+%Seção: generate.c
 
-\section{generate.cpp}
+\section{generate.c}
 
-\lstinputlisting[caption=generate.cpp]{src/generate.cpp}
+\lstinputlisting[caption=generate.c]{src/generate.c}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: ordena.cpp
+%Seção: ordena.c
 
-\section{ordena.cpp}
+\section{ordena.c}
 
-\lstinputlisting[caption=ordena.cpp]{src/ordena.cpp}
+\lstinputlisting[caption=ordena.c]{src/ordena.c}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

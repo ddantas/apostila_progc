@@ -4,25 +4,25 @@
 all: ascii dado generate ordena pause primos
 
 pause:
-	gcc pause.cpp -o pause
+	gcc pause.c -o pause
 
 ascii:
-	gcc ascii.cpp -o ascii
+	gcc ascii.c -o ascii
 
 dado:
-	gcc dado.cpp -o dado
+	gcc dado.c -o dado
 
 primos:
-	gcc primos.cpp -o primos
+	gcc primos.c -o primos
 
 series:
-	gcc series.cpp -o series
+	gcc series.c -o series
 
 generate:
-	gcc generate.cpp -o generate
+	gcc generate.c -o generate
 
 ordena:
-	gcc ordena.cpp -o ordena -lrt
+	gcc ordena.c -o ordena -lrt
 
 clean:
 	rm -f pause ascii dado primos series generate ordena 

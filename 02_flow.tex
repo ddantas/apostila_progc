@@ -22,23 +22,23 @@ Uma instrução do tipo \IF\ executa um bloco de instruções somente se uma dad
 \item A forma geral de uma instrução \IF\ é a seguinte:
 
 {\tt 
-if (<expressão condicional>)                     \\
-\{                                               \\
-\TAB <bloco executado se a condição for verdadeira>  \\
-\}                                               \\
+if (\PLACEHOLDER{expressão condicional})             \\
+\{                                                   \\
+\TAB \PLACEHOLDER{bloco executado se a condição for verdadeira}  \\
+\}                                                   \\
 }
 
 \item A forma geral de uma instrução \IF/\ELSE\ é a seguinte:
 
 {\tt 
-if (<expressão condicional>)                     \\
-\{                                               \\
-\TAB <bloco executado se a condição for verdadeira>  \\
-\}                                               \\
-else                                             \\
-\{                                               \\
-\TAB <bloco executado se a condição for falsa>   \\
-\}                                               \\
+if (\PLACEHOLDER{expressão condicional})                         \\
+\{                                                               \\
+\TAB \PLACEHOLDER{bloco executado se a condição for verdadeira}  \\
+\}                                                               \\
+else                                                             \\
+\{                                                               \\
+\TAB \PLACEHOLDER{bloco executado se a condição for falsa}       \\
+\}                                                               \\
 }
 
 \item Observe que a expressão condicional só aparece uma vez, junto ao \IF, jamais junto ao \ELSE.
@@ -62,9 +62,9 @@ Palavra reservada para criar instruções de iteração, ou seja, laços. Um la�
 \item A forma geral de uma instrução \FOR\ é a seguinte:
 
 {\tt 
-for (<inicialização>; <condição de continuidade>; <incremento>) \\
+for (\PLACEHOLDER{inicialização}; \PLACEHOLDER{condição de continuidade}; \PLACEHOLDER{incremento}) \\
 \{                                                            \\
-\TAB <bloco a ser executado várias vezes>                     \\
+\TAB \PLACEHOLDER{bloco a ser executado várias vezes}                     \\
 \}                                                            \\
 }
 
@@ -88,15 +88,27 @@ Faz exatamente o mesmo que o \FOR, ou seja, serve para criar laços. A diferenç
 \item A forma geral de uma instrução \WHILE\ é a seguinte:
 
 {\tt 
-<inicialização>;                                              \\ 
-while (<condição de continuidade>)                            \\
+\PLACEHOLDER{inicialização};                                  \\ 
+while (\PLACEHOLDER{condição de continuidade})                \\
 \{                                                            \\
-\TAB <bloco a ser executado várias vezes>                     \\
-\TAB <incremento>;                                            \\
+\TAB \PLACEHOLDER{bloco a ser executado várias vezes}         \\
+\TAB \PLACEHOLDER{incremento};                                \\
 \}                                                            \\
 }
 
 \item A inicialização, condição de continuidade e incremento funcionam exatamente da mesma maneira que no \FOR, conforme explicado na Seção~\ref{sec:for}
+
+\item Às vezes é necessário executar o bloco uma vez antes de testar a condição de continuidade. Nesse caso. usamos a forma alternativa abaixo com \DO:
+
+{\tt 
+\PLACEHOLDER{inicialização};                                  \\ 
+do                                                            \\
+\{                                                            \\
+\TAB \PLACEHOLDER{bloco a ser executado várias vezes}         \\
+\TAB \PLACEHOLDER{incremento};                                \\
+\}                                                            \\
+while (\PLACEHOLDER{condição de continuidade});               \\
+}
 
 \end{itemize}
 

@@ -23,18 +23,81 @@ O C é uma linguagem {\it case sensitive}, compilada, com tipagem estática e fr
 {\tt
 \begin{tabular}{lll}
 char     & void     & for     \\
-double   & true     & if      \\
-float    & false    & else    \\
-int      & switch   & typedef \\
-long     & case     & struct  \\
-short    & default  & return  \\
-signed   & break    & main    \\
+double   & const    & if      \\
+float    & switch   & else    \\
+int      & case     & typedef \\
+long     & default  & struct  \\
+short    & break    & return  \\
+signed   & continue & main    \\
 unsigned & while    & sizeof  \\
+static   & do       & enum    \\
+\end{tabular}
+}
+
+\item A lista de palavras reservadas depende da versão do C. As palavras abaixo, por exemplo, surgiram na versão de 2020.
+
+{\tt
+\begin{tabular}{lll}
+bool     & true     & false   \\
 \end{tabular}
 }
 
 
+
 \end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+\begin{tabular}{ll}
+  \toprule
+  \textbf{Categoria} & \textbf{Palavra Reservada} \\
+  \midrule
+    \multirow{4}{*}{Tipos de Dados Primitivos} 
+    & \texttt{char} \\
+    & \texttt{double} \\
+    & \texttt{float} \\
+    & \texttt{int} \\
+  \midrule
+    \multirow{4}{*}{Modificadores de Tipo} 
+    & \texttt{long} \\
+    & \texttt{short} \\
+    & \texttt{signed} \\
+    & \texttt{unsigned} \\
+  \midrule
+    Tipos Especiais & \texttt{void} \\
+  \midrule
+    Qualificadores de Tipo & \texttt{const} \\
+  \midrule
+    \multirow{5}{*}{Controle de Fluxo (Seleção)} 
+    & \texttt{switch} \\
+    & \texttt{case} \\
+    & \texttt{default} \\
+    & \texttt{if} \\
+    & \texttt{else} \\
+  \midrule
+    \multirow{2}{*}{Controle de Fluxo (Repetição)} 
+    & \texttt{for} \\
+    & \texttt{while} \\
+  \midrule
+    \multirow{2}{*}{Controle de Fluxo (Desvio)} 
+    & \texttt{break} \\
+    & \texttt{continue} \\
+  \midrule
+    Definição de Tipos & \texttt{typedef} \\
+  \midrule
+    Tipos Estruturados & \texttt{struct} \\
+  \midrule
+    Controle de Funções & \texttt{return} \\
+  \midrule
+    Operadores & \texttt{sizeof} \\
+  \midrule
+    Ponto de Entrada & \texttt{main} \\
+  \bottomrule
+\end{tabular}
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -65,15 +128,15 @@ int main(void)
 \end{lstlisting}
 
 
-\item Ainda outro programa em C: como no exemplo anterior, imprime uma mensagem na tela. Além disso, espera o usuário pressionar uma tecla antes de terminar a execução através de uma chamada de sistema a um comando chamado {\tt pause}. Essa chamada é feita através da função \SYSTEM. Para usar \SYSTEM, é necessário incluir o arquivo de cabeçalho {\tt cstdlib}.
+\item Ainda outro programa em C: como no exemplo anterior, imprime uma mensagem na tela. Além disso, espera o usuário pressionar Enter antes de terminar a execução através de uma chamada à função \GETCHAR.
 
 \begin{lstlisting}
 #include <stdio.h>
-#include <cstdlib>
 int main(void)
 {
     printf("Hello world!\n");
-    system("pause");
+    printf("Pressione Enter para continuar...\n");
+    getchar();
 }
 \end{lstlisting}
 
@@ -92,20 +155,20 @@ Para programar em C é necessário um compilador. Se seu sistema operacional for
 
 Se seu sistema operacional for Linux, instale o gcc rodando o comando
 
-{\tt sudo apt-get install gcc}
+{\tt sudo apt install gcc}
 
 \begin{itemize}
 
 \item Como criar um programa em C
 
-\subitem 1 - Editar o código fonte e salvar em um arquivo com extensão cpp.
+\subitem 1 - Editar o código fonte e salvar em um arquivo com extensão c.
 \subitem 2 - Compilar o código fonte usando um compilador.
 \subitem 3 - Rodar o programa.
 
 \item Usando o devcpp: o devcpp é um ambiente integrado de programação, com editor e compilador na mesma aplicação.
 
 \subitem 1 - Criar um novo {\it source file} com ctrl + n.
-\subitem 2 - Editar e salvar o arquivo com extensão cpp.
+\subitem 2 - Editar e salvar o arquivo com extensão c.
 \subitem 3 - Pressionar F9 para compilar e rodar.
 \subitem 4 - Ler as mensagens do compilador e corrigir os erros.
 \subitem 5 - {\it Go to} 3.
@@ -113,10 +176,10 @@ Se seu sistema operacional for Linux, instale o gcc rodando o comando
 \item Usando o gcc: o gcc é um compilador de linha de comando.
 
 \subitem 1 - Criar um novo {\it source file} com um editor de texto como o emacs.
-\subitem 2 - Editar e salvar o arquivo com extensão cpp.
+\subitem 2 - Editar e salvar o arquivo com extensão c.
 \subitem 3 - Compilar usando o gcc. Antes de rodar a linha de comando abaixo, substitua o conteúdo entre {\tt <>} pelos nomes dos arquivos.
 
-{\tt gcc <nome\_arq\_fonte.cpp> -o <nome\_arq\_executável>}
+{\tt gcc \underline{nome\_arq\_fonte.c} -o \underline{nome\_arq\_executável}}
 
 \subitem 4 - Ler as mensagens do compilador e corrigir os erros de compilação.
 \subitem 5 - Chamar o executável caso tenha compilado e corrigir os erros de lógica.
@@ -220,12 +283,10 @@ M\_PI    & M\_E     &         \\
 
 \begin{lstlisting}
 #include <stdio.h>
-#include <cstdlib>
 #include <math.h>
 int main(void)
 {
     printf("O seno de pi/4 eh %f\n", sin(3.14/4.0));
-    system("pause");
 }
 \end{lstlisting}
 
@@ -251,12 +312,10 @@ Programa que imprime o valor do seno
 de 45 graus, ou pi/4.
 */
 #include <stdio.h> // biblioteca do printf
-#include <cstdlib> // biblioteca do system
 #include <math.h>  // biblioteca do sin
 int main(void)
 {
     printf("O seno de pi/4 eh %f\n", sin(3.14/4.0));
-    system("pause");
 }
 \end{lstlisting}
 
@@ -399,13 +458,11 @@ Para descobrir quanto espaço ocupa uma variável de um certo tipo de dados, usa
 
 \begin{lstlisting}
 #include <stdio.h>
-#include <cstdlib>
 int main(void)
 {
-    char C;
+    char c;
     printf("Um int ocupa %ld bytes\n", sizeof(int));
-    printf("A variavel C ocupa %ld bytes\n", sizeof(C));
-    system("pause");
+    printf("A variavel c ocupa %ld bytes\n", sizeof(c));
 }
 \end{lstlisting}
 
@@ -422,10 +479,10 @@ Expressões numéricas são compostas por operadores e operandos. Os operandos p
 
 \begin{itemize}
 \item Uma expressão elementar contém apenas um operando:
-\subitem {\tt <literal>}
-\subitem {\tt <função que retorna valor>}
-\subitem {\tt <variável>}
-\subitem {\tt <constante>}
+\subitem {\tt \PLACEHOLDER{literal}}
+\subitem {\tt \PLACEHOLDER{função que retorna valor}}
+\subitem {\tt \PLACEHOLDER{variável}}
+\subitem {\tt \PLACEHOLDER{constante}}
 
 \item Exemplos de expressões elementares:
 \begin{lstlisting}
@@ -436,8 +493,8 @@ M_PI
 \end{lstlisting}
 
 \item Uma expressão composta pode conter vários operadores e operandos:
-\subitem {\tt ( <expressão> <operador binário> <expressão> )}
-\subitem {\tt ( <operador unário> <expressão> )}
+\subitem {\tt ( \PLACEHOLDER{expressão} \PLACEHOLDER{operador binário} \PLACEHOLDER{expressão} )}
+\subitem {\tt ( \PLACEHOLDER{operador unário} \PLACEHOLDER{expressão} )}
 
 \item Exemplos de expressões compostas:
 \begin{lstlisting}
@@ -459,7 +516,7 @@ n = 2 * (3 + i)
 \begin{itemize}
 \item A forma geral de uma atribuição é a seguinte:
 
-{\tt <identificador da variável> = <expressão>;}
+{\tt \PLACEHOLDER{identificador da variável} = \PLACEHOLDER{expressão};}
 
 Onde é claro que {\tt expressão} pode ser elementar, como um valor literal, outra variável, uma constante, uma chamada a função; ou composta, como uma operação aritmética, lógica etc.
 

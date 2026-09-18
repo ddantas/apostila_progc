@@ -162,7 +162,6 @@ scanf("%c", &letra);
 
 \begin{lstlisting}
 #include <stdio.h> 
-#include <cstdlib> 
 int main (void)
 {
   int result;
@@ -170,7 +169,6 @@ int main (void)
   printf("Digite um numero real:\n");
   result = scanf("%f", &userfloat);
   printf("result = %d, real digitado = %f\n", result, userfloat);
-  system("pause");
 }
 \end{lstlisting}
 
@@ -188,7 +186,6 @@ int main (void)
 
 \begin{lstlisting}
 #include <stdio.h> 
-#include <cstdlib> 
 int main (void)
 {
   int result;
@@ -198,7 +195,6 @@ int main (void)
   gets(line);
   result = sscanf(line, "%f", &userfloat);
   printf("result = %d, real digitado = %f\n", result, userfloat);
-  system("pause");
 }
 \end{lstlisting}
 

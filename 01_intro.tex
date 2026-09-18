@@ -179,7 +179,7 @@ Se seu sistema operacional for Linux, instale o gcc rodando o comando
 \subitem 2 - Editar e salvar o arquivo com extensão c.
 \subitem 3 - Compilar usando o gcc. Antes de rodar a linha de comando abaixo, substitua o conteúdo entre {\tt <>} pelos nomes dos arquivos.
 
-{\tt gcc \underline{nome\_arq\_fonte.c} -o \underline{nome\_arq\_executável}}
+{\tt gcc \PLACEHOLDER{nome\_arq\_fonte.c} -o \PLACEHOLDER{nome\_arq\_executável}}
 
 \subitem 4 - Ler as mensagens do compilador e corrigir os erros de compilação.
 \subitem 5 - Chamar o executável caso tenha compilado e corrigir os erros de lógica.
@@ -212,7 +212,7 @@ Caracteres:              & 'a'                   & Strings:          & "Hello wo
                          & '4'                   &                   & "bom dia"           \\
                          & '\textbackslash n'    &                   & "Idade = \%d anos"   \\
 \\
-Valores booleano:        & true                  &                   &                      \\
+Valores booleanos:       & true                  &                   &                      \\
                          & false                 &                   &                      \\
 \end{tabular}
 }
@@ -279,7 +279,7 @@ M\_PI    & M\_E     &         \\
 \end{tabular}
 }
 
-\item Abaixo está um exemplo de programa que usa essa biblioteca. O programa imprime uma mensagem com o valor do seno de de pi/4 através de uma chamada a \PRINTF, e espera o usuário pressionar uma tecla antes de finalizar.
+\item Abaixo está um exemplo de programa que usa essa biblioteca. O programa imprime uma mensagem com o valor do seno de de pi/4 através de uma chamada a \PRINTF.
 
 \begin{lstlisting}
 #include <stdio.h>
@@ -361,7 +361,7 @@ Variáveis são posições de memória com um nome, usadas para armazenar valore
 \item A inicialização de uma variável é onde atribuímos a ela algum valor.
 \item A declaração de uma variável tem o seguinte formato:
 
-{\tt <tipo de dados> <identificador>;}
+{\tt \PLACEHOLDER{tipo de dados} \PLACEHOLDER{identificador};}
 
 \item Exemplos de declarações de variáveis:
 \begin{lstlisting}
@@ -385,7 +385,7 @@ long double value;
 
 \item Variáveis locais e globais podem ser inicializadas, ou seja, receber algum valor, no momento de sua declaração. O formato de uma declaração com inicialização é o seguinte:
 
-{\tt <tipo de dados> <identificador> = <valor>;}
+{\tt \PLACEHOLDER{tipo de dados} \PLACEHOLDER{identificador} = \PLACEHOLDER{valor};}
 
 Lembrando que identificador é o nome. O valor pode ser um literal, como descrito na Seção~\ref{sec:lit}, outra variável, uma chamada de função que retorna algum valor, ou mesmo uma expressão matemática.
 
@@ -413,7 +413,7 @@ Como variáveis, constantes são posições de memória que armazenam algum valo
 
 \item A declaração de uma constante tem o seguinte formato:
 
-{\tt const <tipo de dados> <identificador> = <valor>;}
+{\tt const \PLACEHOLDER{tipo de dados} \PLACEHOLDER{identificador} = \PLACEHOLDER{valor};}
 
 \item Exemplos de declarações de constantes:
 \begin{lstlisting}

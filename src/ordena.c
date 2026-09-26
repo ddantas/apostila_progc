@@ -169,8 +169,8 @@ void mergeSort(int* arr, int size)
 
 double timer(int start)
 {
-    static timespec t0;
-    static timespec t1;
+    static struct timespec t0;
+    static struct timespec t1;
 
     if (start)
     {

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Capítulo: Controle de fluxo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Controle de fluxo}
 
 Um programa de computador é uma sequência de instruções. Normalmente as instruções são executadas na ordem em que aparecem no programa. Porém, isso permite apenas a criação de programas muito simples. 
@@ -10,9 +10,10 @@ Imagine que tenhamos por exemplo uma matriz com centenas de valores. Para proces
 
 Outro caso em que o controle de fluxo é útil é quando uma instrução é executada em apenas alguns casos. Imagine que tempos um banco de dados com milhões de valores de CPF e queremos imprimir apenas o nome do portador de um certo CPF. Podemos usar uma instrução do tipo {\tt if} que, para cada CPF lido, testa se é igual ao CPF desejado e imprime o nome do portador somente em caso afirmativo.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: if / else
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{if / else}
 
 Uma instrução do tipo \IF\ executa um bloco de instruções somente se uma dada condição é verdadeira. Opcionalmente pode ser complementada com uma instrução \ELSE, que executa outro bloco caso a dada condição seja falsa.
@@ -49,9 +50,46 @@ else                                                             \\
 
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: for
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{switch / case}
+
+Uma instrução do tipo \SWITCH\ avalia uma expressão inteira de tipo \INT, \CHAR, \SHORT\ ou \LONG. Pode selecionar, dentre vários casos, aquele correspondente ao valor da expressão. O bloco de código correspondente ao caso inicia com a palavra-chave \CASE\ seguida de um valor literal e dois pontos.
+
+\begin{itemize}
+
+\item A forma geral de uma instrução \SWITCH\ é a seguinte:
+
+{\tt 
+switch (\PLACEHOLDER{expressão inteira})             \\
+\{ \\
+\TAB case \PLACEHOLDER{valor inteiro}: \\
+\TAB\TAB \PLACEHOLDER{bloco executado se a expressão for igual ao valor} \\
+\TAB\TAB break; \\
+\TAB case \PLACEHOLDER{valor inteiro}: \\
+\TAB\TAB \PLACEHOLDER{bloco executado se a expressão for igual ao valor} \\
+\TAB\TAB break; \\
+\TAB ... \\
+\TAB default: \\
+\TAB\TAB \PLACEHOLDER{bloco executado caso contrário} \\
+\TAB\TAB break; \\
+\} \\
+}
+
+\item O bloco de cada caso deve terminar em \BREAK\ para que a execução salte para o final do \SWITCH. Sem o \BREAK, a execução continua para o bloco de instruções do \CASE\ seguinte.
+
+\item O caso \DEFAULT\ é executado se nenhum dos valores casar com a expressão. Por convenção vem sempre ao final do bloco do \SWITCH.
+
+\item A expressão usada no \SWITCH\ pode ser uma variável. No \CASE, porém, variáveis não são permitidas. Em C, a partir do padrão C23, é permitido o uso de constantes declaradas com \CONSTEXPR. Em C++ é permitido o uso de constantes.
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{for}
 \label{sec:for}
 
@@ -75,9 +113,10 @@ for (\PLACEHOLDER{inicialização}; \PLACEHOLDER{condição de continuidade}; \P
 
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: while
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{while}
 \label{sec:while}
 
@@ -111,5 +150,120 @@ while (\PLACEHOLDER{condição de continuidade});               \\
 }
 
 \end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercícios}
+
+\begin{enumerate}
+
+  \item Crie uma função \MAIN\ que imprime todos os inteiros de 1 a 100 com apenas uma instrução com \PRINTF. Use:
+    \begin{enumerate}
+      \item um laço com a palavra reservada \WHILE.
+      \item um laço com a palavra reservada \FOR.
+    \end{enumerate}
+
+  \item Seja n um inteiro entre 1 e 1000. Crie uma função \MAIN\ com um laço ({\tt for} ou {\tt while}) que imprime uma mensagem \verb|"%d modulo 2 vale %d"| para cada {\tt n} entre 1 e 1000. No lugar do primeiro \%d deve aparecer o valor de {\tt n}, e no lugar do segundo \%d, o valor de {\tt n} modulo 2. O operador módulo, representado por \%, retorna o resto da divisão de um número por outro número. Por exemplo, 12 \% 10 retorna 2.
+
+	Resposta:
+
+%%%%%%%%%%
+\begin{lstlisting}
+int main(void)
+{
+    for(int i = 1; i <= 1000; i++)
+    {
+        printf("\%d modulo 2 vale \%d\n", i, i \% 2);
+    }
+}
+\end{lstlisting}
+%%%%%%%%%%
+
+  \item Seja n um inteiro entre 1 e 1000. Crie uma função \MAIN\ com um laço (for ou while) que imprime uma mensagem \verb|"%d eh par"| se {\tt n} for par, ou \verb|"%d eh impar"| se {\tt n} for impar, para cada n entre 1 e 1000. No lugar do primeiro \verb|%d| deve aparecer o valor de {\tt n}. Usar if para testar se o módulo de {\tt n} por 2 vale 0, o que indica que {\tt n} é par, ou 1, o que indica que {\tt n} é ímpar. Observe que operador de comparação que testa igualdade em C é o {\tt ==}, diferente do operador de atribuição {\tt =}.
+
+  \item Seja $v = \sum_{i=0}^{10}i$. Crie uma função \MAIN\ que calcula $v$ usando:
+    \begin{enumerate}
+      \item um laço com a palavra reservada \WHILE.
+      \item um laço com a palavra reservada \FOR.
+    \end{enumerate}
+
+  \item Seja $n$ um número inteiro. Crie uma função main que calcula seu fatorial usando um laço. Qual o maior $n$ de tipo \INT\ que o C é capaz de calcular? E de tipo \LONGINT?
+
+  \item Crie um programa que calcula com um laço o produtório abaixo para $n = 10$.
+    \begin{enumerate}
+      \item \[ \prod_{i = 1}^{n} i = n!\]
+    \end{enumerate}
+
+  \item Refaça a questão anterior pedindo ao usuário que forneça um valor de $n$.
+
+  \item Crie um programa que calcula as séries abaixo para $n = 10$. Calcule a somatória com um laço. Caltule também o lado direito da equação e imprima ambos os resultados para comparação.
+    \begin{enumerate}
+      \item \[ \sum_{i = 1}^{n} i = \frac{n(n+1)}{2}\]
+      \item \[ \sum_{i = 1}^{n} 2i = n^2 + n\]
+      \item \[ \sum_{i = 1}^{n} 2i - 1 = n^2\]
+      \item \[ \sum_{i = 0}^{n} 2^i = 2 ^ {n+1} - 1 \]
+      \item \[ \sum_{i = 1}^{n} i^2 = \frac{1}{6} n(n+1)(2n+1) \]
+      \item \[ \sum_{i = 1}^{n} i^3 = \left( \frac{n(n+1)}{2} \right)^2 \]
+      \item \[ \sum_{i = 1}^{n} \frac{1}{i(i+1)} = \frac{n}{n+1} \]
+      \item \[ \sum_{i = 1}^{n} 3i - 2 = \frac{n(3n-1)}{2} \]
+      \item \[ \sum_{i = 1}^{n} 5 + 2(i - 1) = \frac{n(10 + 2(n-1))}{2} \]
+      \item \[ \sum_{i = 1}^{n} i(2)^{i-1} = 1 + (n-1)2^n \]
+      \item \[ \lim_{n \rightarrow \infty}\sum_{k = 0}^{n} \frac{1}{k!} = e \]
+      \item \[ \lim_{n \rightarrow \infty}\sum_{k = 0}^{n} \frac{(-1)^k}{2k + 1} = \frac \pi 4 \]
+      \item \[ \sum_{i = 1}^{m}\sum_{j = 1}^{n} ij = \frac{mn(m+1)(n+1)}{4} \]
+    \end{enumerate}
+
+  \item Refaça a questão anterior pedindo ao usuário que forneça um valor de $n$.
+  
+  \item Crie um programa que calcula a soma dos 100 primeiros termos das séries abaixo.
+    \begin{enumerate}
+      \item \[ \sum_{i = 1}^{\infty} \frac{1}{i} \]
+      \item \[ \sum_{i = 0}^{\infty} \frac{1}{2^i} \]
+    \end{enumerate}
+
+  \item Crie um programa que calcula as séries da questão anterior enquanto a parcela é maior que $10^{-3}$.
+
+  \item Uma relação de recorrência é uma equação segundo a qual o $n$-ésimo termo de uma sequência é dado por alguma combinação dos termos anteriores. O método de Newton é um exemplo de relação de recorrência.
+    \[ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} \]
+    O processo é repetido até que o valor de $f(x_n)$ seja suficientemente próximo de zero, ou seja, até que tenha módulo menor que um certo erro $\varepsilon$. Use o método de Newton para encontrar
+    \begin{enumerate}
+      \item duas raízes de $f(x) = x^2 - 9$.
+      \item duas raízes de $f(x) = x^2 + x - 2$.
+      \item uma raíz de $\cos(x)$ entre 0 e 3.
+    \end{enumerate}
+
+  \item Crie um programa que calcula o produto dos 100 primeiros termos dos produtórios abaixo.
+    \begin{enumerate}
+      \item \[ \prod_{k = 1}^{\infty} \left( \frac{2k}{2k - 1}\frac{2k}{2k+1} \right) = \frac 21 \frac 23 \frac 43 \frac 45 \frac 65 \frac 67= \frac \pi4 \]
+    \end{enumerate}
+
+  \item O número de combinações de $n$ itens $k$ a $k$ é dado pela equação abaixo.
+    \[ {n \choose k} = \frac{n!}{k! (n-k)!} \]
+    \begin{enumerate}
+      \item Peça ao usuário que insira $n$ e $k$. Use-os para calcular ${n \choose k}$.
+      \item Faça dois laços e imprima as dez primeiras linhas do triângulo de Pascal, ou seja, para cada linha $n$ de 0 a 9, imprima os valores de ${n \choose k}$ com $k$ de 0 a $n$.
+    \end{enumerate}
+
+  \item Crie um programa que testa se um certo $n$ é primo. Use um laço para testar se os inteiros menores que $n$ o dividem.
+    \begin{enumerate}
+      \item Teste para $n$ = 101.
+      \item Solicite para o usuário que insira algum valor de $n$.
+      \item Teste para $n$ variando de 2 a 1000 e imprima o total de números primos encontrados.
+      \item Teste para $n$ variando de 3 a 9999 pulando os pares e imprima o total de números primos encontrados.
+    \end{enumerate}
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
 
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Capítulo: Funções
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Funções}
 
 Funções são blocos de instruções que executam uma certa tarefa. 
@@ -24,16 +24,20 @@ Podemos dizer que a definição de uma função tem cinco partes: identificador 
 
 \item Tipo de dado de retorno é o tipo de dado que a função retorna. Como já foi visto na Seção~\ref{sec:expr}, uma chamada a uma função é uma expressão elementar, e pode ser usada da mesma maneira que uma variável ou valor de mesmo tipo.
 
+%%%%%%%%%%
 \begin{lstlisting}
   double x = sin(a);
   printf("%f\n", x);
 \end{lstlisting}
+%%%%%%%%%%
 
   Observe que \PRINTF\ imprimirá o valor de tipo \DOUBLE\ retornado pela função \SIN. De maneira alternativa, poderíamos colocar a chamada \SIN\ diretamente como parâmetro de \PRINTF.
 
+%%%%%%%%%%
 \begin{lstlisting}
   printf("%f\n", sin(a));
 \end{lstlisting}
+%%%%%%%%%%
 
 \item Lista de parâmetros são os dados de entrada da função. Cada parâmetro é uma variável cujo valor é definido na chamada da função. Cada item da lista tem o mesmo formato de uma declaração de variável, ou seja, é um tipo de dado seguido de um identificador. Se uma função recebe mais de um parâmetro, eles devem ser separados por vírgula.
 
@@ -45,6 +49,7 @@ Podemos dizer que a definição de uma função tem cinco partes: identificador 
 
 No exemplo abaixo podemos ver uma declaração bem simples de função. Essa função não recebe parâmetros e nem retorna valor. Simplesmente imprime uma mensagem e retorna. Logo após a declaração, vemos um exemplo de função \MAIN\ que a chama.
 
+%%%%%%%%%%
 \begin{lstlisting}
 #include <stdio.h>
 void cumprimenta(void)
@@ -57,9 +62,11 @@ int main(void)
   cumprimenta();
 }
 \end{lstlisting}
+%%%%%%%%%%
 
 Abaixo temos outro exemplo de função que não retorna valores. Essa função recebe um número de tipo \DOUBLE\ e o imprime usando notação científica.
 
+%%%%%%%%%%
 \begin{lstlisting}
 #include <stdio.h>
 void imprimed(double val)
@@ -73,9 +80,11 @@ int main(void)
   printf("\n");
 }
 \end{lstlisting}
+%%%%%%%%%%
 
 Vale notar que o tipo de dado de retorno da função não tem relação com os tipos dos parâmetros. Podem ser completamente diferentes como no exemplo abaixo, que recebe \FLOAT\ como entrada e retorna \INT. A expressão {\tt (int) } executa um {\it typecast}, ou seja, uma conversão de tipo. 
 
+%%%%%%%%%%
 \begin{lstlisting}
 #include <stdio.h>
 int arredonda(float val)
@@ -88,14 +97,17 @@ int main(void)
   printf("Pi eh aproximadamente %d\n", arredonda(3.14159265));
 }
 \end{lstlisting}
+%%%%%%%%%%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Passagem de parâmetros por valor
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Passagem de parâmetros por valor}
 
 Quando chamamos uma função, os valores dos parâmetros são copiados para as variáveis definidas na lista de parâmetros. Podemos modificar esses valores no interior da função sem que isso tenha efeito fora dela.
 
+%%%%%%%%%%
 \begin{lstlisting}
 #include <stdio.h>
 int dobra(int n)
@@ -111,12 +123,13 @@ int main(void)
   printf("O dobro de %d eh %d\n", a, b);
 }
 \end{lstlisting}
+%%%%%%%%%%
 
 O valor de {\tt a} é copiado para o parâmetro {\tt n} da função. {\tt n} recebe 10 mas {\tt a} permanece 5.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Passagem de parâmetros por referência
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Passagem de parâmetros por referência}
 
 Esse tipo de passagem de parâmetro é necessário quando a função deve ser capaz de alterar alguma variável fora de seu escopo. Em outras palavras, quando precisamos que a função altere alguma variável da função que a chamou. Um exemplo de passagem de parâmetro por referência é o que fazemos ao chamar \SCANF.
@@ -125,6 +138,7 @@ Nesse tipo de passagem de parâmetro, ao invés de passarmos um valor, passamos 
 
 No exemplo abaixo, a função {\tt troca} é implementada. Ela troca os valores de duas variáveis da função que a chamou. Isso só é possível usando passagem de parâmetro por referência.
 
+%%%%%%%%%%
 \begin{lstlisting}
 #include <stdio.h>
 int troca(int *a, int *b)
@@ -143,5 +157,95 @@ int main(void)
   printf("Depois: x = %d, y = %d\n", x, y);
 }
 \end{lstlisting}
+%%%%%%%%%%
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercícios}
+
+  \begin{enumerate}
+    \item Crie uma função chamada {\tt alo} que não recebe parâmetros nem retorna valores, apenas imprime a mensagem \verb|"hello world"|.
+	Resposta:
+\begin{lstlisting}
+	void alo(void)
+	{
+		printf("hello world\n");
+	}
+\end{lstlisting}
+
+    \item Crie uma função \MAIN\ que simplesmente chama a função {\tt alo}.
+
+    \item Crie uma função de tipo \VOID\ chamada {\tt preguica}, que não recebe parâmetros e não faz nada.
+
+    \item Crie uma função \MAIN\ que simplesmente chama a função {\tt preguica}.
+
+    \item Crie uma função chamada {\tt imprimeInt} que recebe um parâmetro inteiro, mas não retorna valores, apenas imprime a mensagem \verb|"valor inteiro igual a "| seguida do valor do parâmetro recebido.
+
+    \item Crie uma função \MAIN\ que simplesmente chama a função {\tt imprimeInt}. Lembre-se de fornecer como parâmetro algum valor inteiro.
+
+    \item Crie uma função chamada {\tt duzia} que recebe um parâmetro real de precisão simples e retorna 12 vezes seu valor.
+	Resposta:
+\begin{lstlisting}
+	float duzia(float x)
+	{
+		return 12*x;
+	}
+\end{lstlisting}
+
+    \item Crie uma função \MAIN\ que simplesmente chama a função {\tt duzia}. Lembre-se de fornecer como parâmetro algum valor de tipo \FLOAT. Salve o resultado em uma variável e imprima o resultado.
+
+    \item Crie uma função de tipo \INT\ chamada {\tt triplo}, que recebe um parâmetro inteiro e retorna três vezes seu valor.
+
+    \item Crie uma função \MAIN\ que chama a função {\tt triplo}, salva o valor retornado em uma variável e em seguida o imprime.
+
+    \item Crie uma função de tipo \INT\ chamada \verb|eh_par|, que recebe um parâmetro inteiro e retorna 1 (um) caso o inteiro seja par, e 0 (zero) caso contrário.
+
+    \item Crie uma função de tipo \VOID\ chamada \verb|imprime_float|, que recebe um parâmetro de tipo float e imprime a mensagem:
+
+\verb|"o valor da variavel real eh %f\n"|
+\\
+substituindo o \verb|%f| pelo valor do parâmetro.
+
+    \item Crie uma funcão de tipo \FLOAT\ chamada \verb|circunferencia|, que recebe um parâmetro de tipo \FLOAT\ igual ao raio de um círculo e retorna o comprimento de sua circunferência.
+
+    \item Crie uma funcão de tipo \FLOAT\ chamada \verb|area_circulo|, que recebe um parâmetro de tipo \FLOAT\ igual ao raio de um círculo e retorna seu raio.
+
+    \item Crie uma funcão de tipo \FLOAT\ chamada \verb|volume_esfera|, que recebe um parâmetro de tipo \FLOAT\ igual ao raio de uma esfera e retorna seu volume.
+
+    \item Crie uma funcão de tipo \INT\ chamada \verb|somatoria|, que recebe um parâmetro de tipo \INT\ chamado {\tt n} e retorna a soma dos inteiros de 1 a {\tt n}.
+
+    \item Crie uma função chamada {\tt fatorial} que recebe um parâmetro inteiro e retorna seu fatorial.
+
+	a) implemente a função usando um laço while.
+
+	b) implemente a função usando um laço for.
+
+	c) implemente a função usando uma chamada a ela mesma. Para isso, use a definição recursiva de fatorial:
+
+		se {\tt n == 0} ({\tt ==} é operador de comparação) 
+
+então {\tt fatorial(n) = 1}
+
+		senão {\tt fatorial(n) = n * fatorial(n-1)}
+
+    \item Crie uma funcão de tipo \INT\ chamada {\tt somatoria}, que recebe um parâmetro de tipo \INT\ chamado {\tt n} e retorna a soma dos inteiros de 1 a {\tt n}.
+
+
+    \item Crie uma funcão de tipo \DOUBLE\ chamada {\tt norma}, que recebe dois parâmetros de tipo \DOUBLE\ chamados {\tt a} e {\tt b}, e retorna a norma do vetor (a,b).
+
+    \item Crie uma função chamada {\tt pg3}, que retorna o terceiro termo de uma progressão geométrica. A função recebe dois parâmetros inteiros, o primeiro parâmetro é o primeiro termo da pg; o segundo é sua razão.
+
+    \item Crie uma função chamada {\tt pg}, que retorna o n-ésimo termo de uma progressão geométrica. A função recebe três parâmetros inteiros, o primeiro parâmetro é o primeiro termo da pg; o segundo é sua razão, o terceiro é o {\tt n}.
+
+    \item Crie uma função de tipo \VOID\ chamada {\tt swap} que recebe dois parâmetros inteiros por referência e troca seus valores.
+      \begin{enumerate}
+        \item Crie uma função  \MAIN\ e dentro dela declare e inicialize duas variáveis inteiras. Imprima seus valores, chame a função {\tt swap} passando-as por referência e imprima novamente, para testar se os valores foram realmente trocados.
+      \end{enumerate}
+
+    \item Crie uma funcão de tipo \DOUBLE\ chamada {\tt delta}, que recebe três parâmetros de tipo \DOUBLE\ chamados {\tt a}, {\tt b} e {\tt c}, e retorna o valor de delta, ou seja, b*b – 4.0*a*c.
+
+    \item Crie uma função de tipo \INT\ chamada {\tt baskara}. Ela recebe por valor três parâmetros de tipo \INT\ chamados {\tt a}, {\tt b} e {\tt c}, representando os coeficientes de uma equação de segundo grau igual a a*x*x + b*x + c. Recebe ainda dois parâmetros por referência, chamados {\tt x1} e {\tt x2}, onde armazenará as raízes encontradas. Ela retorna o número de raízes reais da equação, ou seja, pode retornar 0 (zero), 1 (um) ou 2 (dois). Usar a função  delta da questâo anterior para testar quantas raízes a equação possui.
+
+  \end{enumerate}

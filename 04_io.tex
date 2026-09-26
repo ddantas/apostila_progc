@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Capítulo: Entrada e saída
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Entrada e saída}
 
 Entrada e saída se refere à comunicação do programa, tanto com o usuário quanto com arquivos em disco. 
@@ -15,8 +15,8 @@ Para usar qualquer uma dessas funções, adicionar a seguinte linha ao início d
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: printf
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{printf}
 \label{sec:printf}
 
@@ -102,6 +102,7 @@ Um inteiro ocupa 000004 bytes
 \end{verbatim}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}
 \centering
   \begin{tabular}{|l|l|l|}
@@ -124,27 +125,28 @@ Um inteiro ocupa 000004 bytes
   \caption{Especificadores de formato do C}
   \label{tab:format}
 \end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Em uma mesma string pode haver vários especificadores de formato, bastando que, para cada um dos especificadores, deve haver um valor correspondente como parâmetro. Observe o exemplo abaixo. Existem dois especificadores de formato. O primeiro será substituído pelo valor de {\tt val1} e o segundo, pelo valor de {\tt val2}.
 
+%%%%%%%%%%
 \begin{lstlisting}
 int val1 = 33;
 float val2 = 1.23;
 printf("A variavel inteira vale %d e a variavel real vale %f\n", val1, val2);
 \end{lstlisting}
-
-
-
+%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: scanf
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{scanf}
 \label{sec:scanf}
 
 A chamada a \SCANF\ é semelhante à chamada ao \PRINTF. O primeiro parâmetro também é uma string, mas deve possuir um especificador de formato. Os demais parâmetros são os endereços das posições de memória onde os dados serão gravados. É recomendável porém usar uma chamada \SCANF\ para cada valor a ser lido. Para passar o endereço de memória, é necessário preceder a variável pelo símbolo {\tt \%}.
 
+%%%%%%%%%%
 \begin{lstlisting}
 int i;
 scanf("%d", &i);
@@ -153,6 +155,7 @@ scanf("%f", &x);
 char letra;
 scanf("%c", &letra);
 \end{lstlisting}
+%%%%%%%%%%
 
 \begin{itemize}
 
@@ -160,6 +163,7 @@ scanf("%c", &letra);
 
 \item Segue um exemplo de código com \SCANF.
 
+%%%%%%%%%%
 \begin{lstlisting}
 #include <stdio.h> 
 int main (void)
@@ -171,19 +175,22 @@ int main (void)
   printf("result = %d, real digitado = %f\n", result, userfloat);
 }
 \end{lstlisting}
+%%%%%%%%%%
 
 \item No exemplo acima, {\tt userfloat} armazena o real digitado pelo usuário. A variável {\tt result} será igual a 1 caso a leitura seja bem sucedida, e 0 caso contrário.
 
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: sscanf
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{sscanf}
 \label{sec:sscanf}
 
-\SCANF\ pode não funcionar corretamente quando o usuário digita valores de tipos diferentes do esperado. Uma maneira de contornar isso é armazenando a string em uma variável intermediária antes de fazer a leitura. Nesse caso, a leitura é feita com \SSCANF, uma versão alternativa de \SCANF\ que lê dados de strings.
+A função \SCANF\ pode não funcionar corretamente quando o usuário digita valores de tipos diferentes do esperado. Uma maneira de contornar isso é armazenando a string em uma variável intermediária antes de fazer a leitura. Nesse caso, a leitura é feita com \SSCANF, uma versão alternativa de \SCANF\ que lê dados de strings.
 
+%%%%%%%%%%
 \begin{lstlisting}
 #include <stdio.h> 
 int main (void)
@@ -197,32 +204,36 @@ int main (void)
   printf("result = %d, real digitado = %f\n", result, userfloat);
 }
 \end{lstlisting}
+%%%%%%%%%%
 
 \begin{itemize}
 
-\item No exemplo acima, podemos observar uma nova variável chamada {\tt line}, que armazenará o texto digitado pelo usuário. \GETS\ lê o texto digitado e o armazena em {\tt line}, que é passado como parâmetro para \SSCANF. As demais partes do código permanecem como no exemplo da Seção~\ref{sec:scanf}.
+\item No exemplo acima, podemos observar uma nova variável chamada {\tt line}, que armazenará o texto digitado pelo usuário. \GETS\ lê o texto digitado e o armazena em {\tt line}, que é passado como parâmetro para \SSCANF. As demais partes do código permanecem como no exemplo da Seção~\ref{sec:scanf}. Note que se a linha lida for maior que o espaço alocado de 256 bytes para {\tt line}, outras variáveis ou código binário podem ser sobrescritos. Isso é chamado \textit{buffer overflow}, e pode ser evitado usando {\tt fgets}, que permite limitar o número de bytes lidos.
 
 \end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: fscanf
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{fscanf}
 \label{sec:fscanf}
 
-\FSCANF é uma função que pode ser usada para leitura de dados de arquivos. Recebe um parâmetro a mais que \SCANF: o ponteiro para o arqivo a ser lido.
+A função \FSCANF\ pode ser usada para leitura de dados de arquivos. Recebe um parâmetro a mais que \SCANF: o ponteiro para o arqivo a ser lido.
 
 \begin{itemize}
 
-\item Para obter o ponteiro para o arquivo, usar a função \FOPEN. No exemplo abaixo, {\tt fp} é a variável que armazenará o ponteiro para o arquivo. O primeiro parâmetro é uma string que contém o nome do arquivo a ser aberto. Neste exemplo é {\tt arquivo.txt} mas poderia ser qualquer outro. O segundo parâmetro indica o tipo de acesso desejado, ou seja, leitura ou escrita. Nesse caso contém uma letra {\tt r} para indicar que o arqivo será aberto para leitura. Usar a letra {\tt w} para escrita. \FOPEN\ retorna zero em caso de erro, ou seja, se o arquivo não existir ou se não houver permissão para o acesso desejado.
+\item Para obter o ponteiro para o arquivo, usar a função \FOPEN. No exemplo abaixo, {\tt fp} é a variável que armazenará o ponteiro para o arquivo. O primeiro parâmetro é uma string que contém o nome do arquivo a ser aberto. Neste exemplo é {\tt arquivo.txt} mas poderia ser qualquer outro. O segundo parâmetro indica o tipo de acesso desejado, ou seja, leitura ou escrita. Nesse caso contém uma letra {\tt r} para indicar que o arqivo será aberto para leitura. Usar a letra {\tt w} para escrita. A função \FOPEN\ retorna zero em caso de erro, ou seja, se o arquivo não existir ou se não houver permissão para o acesso desejado.
 
+%%%%%%%%%%
 \begin{lstlisting}
 FILE* fp = fopen("arquivo.txt", "r");
 \end{lstlisting}
+%%%%%%%%%%
 
 \item Uma maneira de testar se o arquivo foi aberto corretamente é mostrada a sqguir. Uma mensagem mais esclarecedora para o usuário, e portanto mais útil, pode incluir o nome do arquivo.
 
+%%%%%%%%%%
 \begin{lstlisting}
   if (fp == 0)
   {
@@ -230,10 +241,11 @@ FILE* fp = fopen("arquivo.txt", "r");
     return 1;
   }
 \end{lstlisting}
-
+%%%%%%%%%%
 
 \item Uma vez que o arquivo esteja aberto, chamar \FSCANF\ com o ponteiro retornado por \FOPEN\ como primeiro parâmetro. Como \SCANF, recebe também uma string com o especificador de formato, e a variável onde o valor lido deve ser armazenado. Essa variável deve ser passada por referência, ou seja, é necessário usar o símbolo {\tt \&} antes do identificador da variável para indicar que é passado seu endereço como parâmetro.
 
+%%%%%%%%%%
 \begin{lstlisting}
 int i;
 fscanf(fp, "%d", &i);
@@ -242,9 +254,11 @@ fscanf(fp, "%f", &x);
 char letra;
 fscanf(fp, "%c", &letra);
 \end{lstlisting}
+%%%%%%%%%%
 
 \item Segue um programa exemplo que lê dois números inteiros de um arquivo. Cada número deve estar em uma linha diferente no arquivo.
 
+%%%%%%%%%%
 \begin{lstlisting}
 #include <stdio.h> 
 int main (void)
@@ -263,9 +277,11 @@ int main (void)
   fclose(fp);
 }
 \end{lstlisting}
+%%%%%%%%%%
 
 \item Abaixo está uma versão alternativa que usa \FGETS\ para ler cada linha do arquivo por completo antes de tentar extrair dela o número. Observe que a função \FGETS\ é usada no lugar da \GETS, da Seção~\ref{sec:sscanf}. \
 
+%%%%%%%%%%
 \begin{lstlisting}
 #include <stdio.h> 
 int main (void)
@@ -288,10 +304,12 @@ int main (void)
   fclose(fp);
 }
 \end{lstlisting}
+%%%%%%%%%%
 
 
 \item Idealmente, deve-se testar se cada \FSCANF\ e \FGETS\ fez uma leitura bem sucedida, como no trecho de código abaixo. \FGETS\ recebe três parâmetros: um vetor de caracteres ou string, o tamanho máximo da string e o ponteiro para o arquivo. Retorna zero em caso de erro.
 
+%%%%%%%%%%
 \begin{lstlisting}
   char* result1 = fgets(line, MAX_LEN, fp);
   int result2 = sscanf(line, "%d", &n);
@@ -304,13 +322,57 @@ int main (void)
     printf("Valor invalido\n");
   }
 \end{lstlisting}
+%%%%%%%%%%
 
 \item Ao final do programa, após fazer todas as leituras necessárias, fechar o arquivo com \FCLOSE, como na linha de código a seguir. Isso salva as escritas no arquivo e o libera para que outros programas possam acessá-lo.
 
+%%%%%%%%%%
 \begin{lstlisting}
   fclose(fp);
 \end{lstlisting}
+%%%%%%%%%%
 
 \end{itemize}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercícios}
+
+\begin{enumerate}
+
+  \item Crie uma funcão \MAIN\ e dentro dela:
+    \begin{enumerate}
+      \item imprima a mensagem \verb|"Favor digitar um valor inteiro \n"|.
+      \item declare uma variável inteira chamada {\tt i}.
+      \item use \SCANF\ para ler o inteiro digitado pelo usuário e salvá-lo na variável {\tt i}.
+      \item imprima a mensagem \verb|"Voce digitou "| seguida do valor digitado e \verb|"\n"|.
+      \item chame \verb|getchar()|.
+    \end{enumerate}
+
+  \item Crie uma funcão \MAIN\ e dentro dela:
+    \begin{enumerate}
+      \item imprima a mensagem \verb|"Favor digitar um valor inteiro\n"|.
+      \item declare as variáveis inteiras {\tt i} e {\tt result}.
+      \item use \SCANF\ para ler o inteiro digitado pelo usuário e salvá-lo na variável {\tt i}. Armazene o valor de retorno de \SCANF\ em {\tt result}.
+      \item caso o valor de {\tt result} seja igual a 1 (um), imprima a mensagem \verb|Voce digitou "| seguida do valor digitado e \verb|"\n"|.
+      \item caso contrário, imprima a mensagem \verb|"Eu pedi um inteiro!\n"|.
+      \item chame \verb|getchar()|.
+    \end{enumerate}
+
+  \item Crie uma funcão \MAIN\ e dentro dela:
+    \begin{enumerate}
+      \item solicite ao usuário que forneça dois valores reais e armazene-os em duas variáveis chamadas {\tt a} e {\tt b}.
+      \item para cada variável lida, se a leitura foi bem sucedida imprima o valor lido. Caso contrário imprima uma mensagem de erro e finalize o programa.
+      \item imprima mensagens indicando o valor da soma, do produto, da diferença, da razão entre {\tt a} e {\tt b}, norma do vetor (a,b) e o valor de {\tt a} elevado a {\tt b}.
+    \end{enumerate}
+
+  \item Crie uma funcão \MAIN\ e dentro dela:
+    \begin{enumerate}
+      \item solicite ao usuário que forneça três valores inteiros e armazene-os em três variáveis chamadas {\tt a}, {\tt b} e {\tt c}.
+      \item para cada variável lida, se a leitura foi bem sucedida imprima o valor lido. Caso contrário imprima uma mensagem de erro e finalize o programa.
+      \item imprima mensagens indicando o valor das raízes da equação de segundo grau igual a {\tt a*x*x + b*x + c}. Usar as funções das questões {\tt baskara} e {\tt delta} criadas anteriormente.
+    \end{enumerate}
+
+\end{enumerate}

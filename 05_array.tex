@@ -1,16 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Capítulo: Vetores
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Vetores}
 
 Vetores são sequências de valores do mesmo tipo referenciados por um mesmo nome. Um elemento específico da sequência é acessado por meio de um índice inteiro não negativo.
 
 Na linguagem C, os vetores começam com o índice zero. Um vetor com {\tt n} posições terá como índices válidos os inteiros de zero a {\tt n-1}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Vetores unidimensionais
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Vetores unidimensionais}
 
 Uma declaração de vetor tem o seguinte formato:
@@ -37,9 +38,10 @@ Uma atribuição de valor a uma certa posição do vetor, por exemplo, tem o seg
 }
 \NEWLINE
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Matrizes
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Matrizes}
 
 Uma matriz é um vetor bidimensional. Sua declaração é semelhante à de um vetor unidimensional.
@@ -60,3 +62,60 @@ Para acessar um item individual de uma matriz, usar o formato abaixo:
 \NEWLINE
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercícios}
+
+\begin{enumerate}
+
+  \item Crie uma funcão \MAIN:
+    \begin{enumerate}
+      \item antes dela defina \verb|TAM_MAX| como sendo 10 (dez).
+      \item dentro dela declare um vetor de inteiros chamado {\tt vet}, com tamanho máximo igual \verb|TAM_MAX|.
+      \item declare uma variável inteira chamada {\tt tamanho}, para armazenar o tamanho ocupado desse vetor. Inicialize-a com zero.
+      \item crie um laço \FOR\ que, a cada passo, solicita ao usuário que insira valores para cada posição do vetor, lê e armazena o dado digitado.
+      \item em caso de sucesso do \SCANF, incremente {\tt tamanho} e continue. Em caso de erro, interrompa o laço com \BREAK.
+      \item depois do laço, imprima o tamanho ocupado do vetor. Note que o tamanho ocupado pode ser diferente do tamanho máximo \verb|TAM_MAX|.
+      \item imprima o conteúdo de cada uma das posições do vetor usando a seguinte mensagem: \verb|vet[%d] = %d\n"| substituindo o primeiro \verb|%d| pela posição, e o segundo pelo conteúdo.
+    \end{enumerate}
+
+  \item Crie uma funcão \MAIN\ e dentro dela, declare um vetor de reais chamado {\tt numeros}. Seu tamanho máximo é definido por uma macro chamada \verb|TAM_MAX|, que vale 10 (dez). Em seguida, abra um arquivo chamado {\tt input.txt} cujo conteúdo é um valor real em cada linha. Use \FSCANF\ para ler esse arquivo e armazenar os valores no vetor {\tt numeros}, e o tamanho ocupado do vetor na variável inteira chamada {\tt tamanho}. Seu programa deve funcionar para qualquer tamanho de entrada, inclusive para arquivos com mais de dez valores. Nesse caso, o vetor ficará completamente ocupado e o valor de tamanho será 10.
+
+  \item Crie um programa que aloca um \textit{array} com tamanho 4$\times$10. Use o \textit{array} para armazenar os valores abaixo considerando $x$ variando de 1 a 10.
+    \begin{enumerate}
+      \item Na primeira coluna o valor de $x$.
+      \item Na segunda coluna o valor de $x^2$.
+      \item Na terceira coluna o valor de $x^3$.
+      \item Na quarta coluna o valor de $x^4$.
+      \item Imprima o conteúdo do \textit{array}.
+    \end{enumerate}
+
+  \item Crie um programa que testa se um certo $n$ é primo. Armazene os primos encontrados em um vetor e use isso para acelerar o processamento. Use um laço para testar se os primos armazenados no vetor dividem $n$.
+    \begin{enumerate}
+      \item Teste para $n$ = 101.
+      \item Solicite para o usuário que insira algum valor de $n$.
+      \item Teste para $n$ variando de 2 a 1000 e imprima o total de números primos encontrados.
+      \item Teste para $n$ variando de 3 a 9999 pulando os pares e imprima o total de números primos encontrados.
+      %\item Use \TIMER\ para cronometrar o tempo de processamento. Compare com a versão do programa do capítulo anterior.
+    \end{enumerate}
+
+  \item Arquivos com extensão PGM armazenam imagens do tipo \textit{portable graymap}. São arquivos muito simples, contendo como primeiro byte a letra P seguida de um dígito: 2 indica que as intensidades dos pixels estão em formato de texto e 5 indica formato binário. Linhas começando com {\tt \#} são comentários e devem ser ignoradas. Depois disso vêm três valores inteiros: largura, altura e intensidade máxima dos pixels, que tipicamente é 255 em imagens com 8 bits por amostra. Finalmente vêm os dados dos pixels, armazenados em formato \textit{raster}, ou seja, primeiro a linha superior, da esquerda para a direita e assim por diante. Obtenha ou crie um arquivo PGM. Em seguida, crie uma função \MAIN e dentro dela
+    \begin{enumerate}
+      \item leia o arquivo e se certifique de que os primeiros bytes são compatíveis com o formato PGM.
+      \item leia a largura e a altura da imagem e salve em duas variáveis.
+      \item leia o valor da intensidade máxima dos pixels e se certifique de que é 255.
+      \item aloque um array de \CHAR\ com tamanho igual a altura $\times$ largura.
+      \item leia os valores dos pixels e armazene no array alocado previamente.
+    \end{enumerate}
+
+  \item Arquivos com extensão PPM armazenam imagens do tipo \textit{portable pixmap}. São muito semelhantes aos arquivos PGM com algumas diferenças. Contêm como primeiro byte a letra P seguida de um dígito: 3 indica que as intensidades dos pixels estão em formato de texto e 6 indica formato binário. Linhas começando com {\tt \#} são comentários e devem ser ignoradas. Depois disso vêm três valores inteiros: largura, altura e intensidade máxima dos pixels, que tipicamente é 255 em imagens com 8 bits por amostra. Finalmente vêm os dados dos pixels, armazenados em formato \textit{raster}. As amostras de cada pixel são armazenadas na ordem \textit{red}, \textit{green} e \textit{blue}. Obtenha ou crie um arquivo PPM. Em seguida, crie uma função \MAIN e dentro dela
+    \begin{enumerate}
+      \item leia o arquivo e se certifique de que os primeiros bytes são compatíveis com o formato PPM.
+      \item leia a largura e a altura da imagem e salve em duas variáveis.
+      \item leia o valor da intensidade máxima dos pixels e se certifique de que é 255.
+      \item aloque um array de \CHAR\ com tamanho igual a altura $\times$ largura $\times$ 3 para armazenar os três canais da imagem.
+      \item leia os valores dos pixels e armazene no array alocado previamente.
+    \end{enumerate}
+    
+\end{enumerate}

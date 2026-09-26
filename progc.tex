@@ -18,14 +18,33 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{comment}
+\usepackage{xcolor}
+
+
+%\usepackage{listings}
+%\lstset{
+%  language=C,                % choose the language of the code
+%  numbers=none,                   % where to put the line-numbers
+%  stepnumber=1,                   % the step between two line-numbers.        
+%  numbersep=10pt,                  % how far the line-numbers are from the code
+%  %backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+%  showspaces=false,               % show spaces adding particular underscores
+%  showstringspaces=false,         % underline spaces within strings
+%  showtabs=false,                 % show tabs within strings adding particular underscores
+%  tabsize=2,                      % sets default tabsize to 2 spaces
+%  captionpos=b,                   % sets the caption-position to bottom
+%  breaklines=true,                % sets automatic line breaking
+%  breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
+%  title=\lstname,                 % show the filename of files included with \lstinputlisting;
+%}
 
 \usepackage{listings}
 \lstset{
   language=C,                % choose the language of the code
   numbers=none,                   % where to put the line-numbers
   stepnumber=1,                   % the step between two line-numbers.        
-  numbersep=10pt,                  % how far the line-numbers are from the code
-  %backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+  numbersep=10pt,                 % how far the line-numbers are from the code
+  backgroundcolor=\color{lightgray},   % choose the background color. You must add \usepackage{color}
   showspaces=false,               % show spaces adding particular underscores
   showstringspaces=false,         % underline spaces within strings
   showtabs=false,                 % show tabs within strings adding particular underscores
@@ -34,7 +53,14 @@
   breaklines=true,                % sets automatic line breaking
   breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
   title=\lstname,                 % show the filename of files included with \lstinputlisting;
+  basicstyle=\ttfamily,        % Uses the document's standard monospace font
+  columns=fullflexible,        % Disables lstlisting's artificial character spacing
+  keepspaces=true,             % Preserves indentation spaces without compressing them
+  keywordstyle=\ttfamily,      % Strips automatic bolding/coloring from keywords
+  commentstyle=\ttfamily,      % Strips styling from comments
+  stringstyle=\ttfamily        % Strips styling from strings
 }
+
 
 %formatacao
 
@@ -45,11 +71,19 @@
 \newcommand{\BV}{\begin{verbatim}}
 \newcommand{\EV}{\end{verbatim}}
 
+%diretivas
+
+\newcommand{\INCLUDE}{{\tt \#include}}
+\newcommand{\DEFINE}{{\tt \#define}}
+
 %tipos de dados
 
 \newcommand{\VOID}{{\tt void}}
+\newcommand{\BOOL}{{\tt bool}}
 \newcommand{\CHAR}{{\tt char}}
 \newcommand{\INT}{{\tt int}}
+\newcommand{\SHORT}{{\tt short}}
+\newcommand{\LONG}{{\tt long}}
 \newcommand{\FLOAT}{{\tt float}}
 \newcommand{\DOUBLE}{{\tt double}}
 
@@ -67,11 +101,15 @@
 
 %palavras reservadas
 
+\newcommand{\CONST}{{\tt const}}
+\newcommand{\CONSTEXPR}{{\tt constexpr}}
+
 \newcommand{\IF}{{\tt if}}
 \newcommand{\ELSE}{{\tt else}}
 
 \newcommand{\SWITCH}{{\tt switch}}
 \newcommand{\CASE}{{\tt case}}
+\newcommand{\DEFAULT}{{\tt default}}
 
 \newcommand{\FOR}{{\tt for}}
 \newcommand{\DO}{{\tt do}}
@@ -117,11 +155,23 @@
 \renewcommand\chaptername{Capítulo}
 \renewcommand\lstlistingname{Listagem}
 
+%ecertices
 
+\newcounter{iQuest}
+\setcounter{iQuest}{0}
+
+\newcommand{\quest}{%
+\addtocounter{iQuest}{1}%
+\arabic{iQuest}}
+
+\newcommand{\zeraquest}{%
+\setcounter{iQuest}{0}}
+
+%title
 
 \title{Notas de aula de COMP0512, Programação C - Programação em C}
 \author{Daniel Oliveira Dantas}
-\date{6 de novembro de 2013}
+\date{18 de setembro de 2026}
 \begin{document}
 
 \maketitle
@@ -176,15 +226,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{06_function.tex}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Capítulo: Exercícios
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\input{07_exercise.tex}
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

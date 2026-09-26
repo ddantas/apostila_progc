@@ -7,5 +7,5 @@
 int main(void)
 {
     printf("Pressione enter para continuar...");
-    getc(stdin);
+    getchar();
 }

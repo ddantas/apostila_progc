@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Capítulo: Introdução ao C
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introdução ao C}
 
 \setcounter{page}{1}    % set page to 1 again to start arabic count
@@ -12,13 +12,13 @@ O C é uma linguagem {\it case sensitive}, compilada, com tipagem estática e fr
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Palavras reservadas
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Palavras reservadas}
 
 \begin{itemize}
 
-\item Palavras reservadas ou palavras chave: são palavras que não podem ser usadas para nomear variáveis ou funções criadas pelo usuário.
+\item Palavras reservadas ou palavras-chave: são palavras que não podem ser usadas para nomear variáveis ou funções criadas pelo usuário.
 
 {\tt
 \begin{tabular}{lll}
@@ -34,11 +34,11 @@ static   & do       & enum    \\
 \end{tabular}
 }
 
-\item A lista de palavras reservadas depende da versão do C. As palavras abaixo, por exemplo, surgiram na versão de 2020.
+\item A lista de palavras reservadas depende da versão do C. As palavras abaixo, por exemplo, surgiram no padrão C23.
 
 {\tt
-\begin{tabular}{lll}
-bool     & true     & false   \\
+\begin{tabular}{llll}
+constexpr & bool     & true     & false   \\
 \end{tabular}
 }
 
@@ -99,10 +99,9 @@ bool     & true     & false   \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Um programa em C mínimo
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Um programa em C mínimo}
 
 
@@ -143,13 +142,12 @@ int main(void)
 \end{itemize}
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Programando em C
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Programando em C}
 
-Para programar em C é necessário um compilador. Se seu sistema operacional for Windows, instale o Orwell Dev-C++, conhecido como {\it devcpp}, disponível em:
+Para programar em C é necessário um compilador. Se seu sistema operacional for Windows, instale o Orwell Dev-C++, conhecido como {\it devcpp}, disponível em
 
 {\tt http://sourceforge.net/projects/orwelldevcpp/}
 
@@ -177,7 +175,7 @@ Se seu sistema operacional for Linux, instale o gcc rodando o comando
 
 \subitem 1 - Criar um novo {\it source file} com um editor de texto como o emacs.
 \subitem 2 - Editar e salvar o arquivo com extensão c.
-\subitem 3 - Compilar usando o gcc. Antes de rodar a linha de comando abaixo, substitua o conteúdo entre {\tt <>} pelos nomes dos arquivos.
+\subitem 3 - Compilar usando o gcc. Antes de rodar a linha de comando abaixo, substitua o conteúdo {\tt\PLACEHOLDER{destacado}} pelos nomes dos arquivos.
 
 {\tt gcc \PLACEHOLDER{nome\_arq\_fonte.c} -o \PLACEHOLDER{nome\_arq\_executável}}
 
@@ -185,12 +183,22 @@ Se seu sistema operacional for Linux, instale o gcc rodando o comando
 \subitem 5 - Chamar o executável caso tenha compilado e corrigir os erros de lógica.
 \subitem 6 - {\it Go to} 3.
 
+\item A linguagem C mudou consideravelmente ao longo dos anos, e, por isso, códigos antigos podem resultar em erros e \textit{warnings} quando usamos novas versões do gcc. O Ubuntu 24 usa o gcc 13, que usa {\tt -std=c17} como versão da linguagem. Já o Ubuntu 26 usa o gcc 15, que usa {\tt -std=c23}. Para usar o padrão C23 com o gcc 13, é necessário usar a opção {\tt std=c2x} na linha de comando.
+
+{\tt gcc -std=c2x \PLACEHOLDER{nome\_arq\_fonte.c} -o \PLACEHOLDER{nome\_arq\_executável}}
+
+\subitem Para descobrir em tempo de execução a versão usada na compilação, pode-se imprimir o valor da macro  {\tt \_\_STDC\_VERSION\_\_} como na linha de código a seguir.
+
+\begin{lstlisting}
+printf("Standard = %ld\n", __STDC_VERSION__);
+\end{lstlisting}
+
 \end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Literais
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Literais}
 \label{sec:lit}
 
@@ -217,9 +225,16 @@ Valores booleanos:       & true                  &                   &          
 \end{tabular}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Chamada de funções
+\begin{itemize}
 
+\item Para usar os valores booleanos, é necessário incluir o arquivo de cabeçalho {\tt stdbool.h}. No padrão C23 e no C++, esses valores se tornaram palavras-chave e não é necessário incluir o cabeçalho.
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Chamada de funções}
 
 \begin{itemize}
@@ -245,9 +260,10 @@ printf("O seno de pi/2 eh %f\n", sin(3.14/2.0));
 
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: A biblioteca de funções matemáticas
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A biblioteca de funções matemáticas}
 
 Para usá-la, adicione a linha seguinte ao início do código:
@@ -258,7 +274,10 @@ Para usá-la, adicione a linha seguinte ao início do código:
 
 \begin{itemize}
 
-\item Caso esteja usando Linux, adicionar a opção {\tt -lm} à linha de comando de chamada ao gcc.
+\item Caso esteja usando Linux, adicionar a opção {\tt -lm} à linha de comando de chamada ao gcc:
+
+{\tt gcc -lm \PLACEHOLDER{nome\_arq\_fonte.c} -o \PLACEHOLDER{nome\_arq\_executável}}
+
 
 \item Contém funções como
 
@@ -292,9 +311,10 @@ int main(void)
 
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Comentários
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comentários}
 
 Comentários são textos ignorados pelo compilador. Dentro de um comentário é possível escrever qualquer coisa, sem risco de erros de compilação. Em C existem dois tipos de comentário:
@@ -322,9 +342,10 @@ int main(void)
 
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Identificadores
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Identificadores}
 \label{sec:ident}
 
@@ -347,9 +368,10 @@ Corretos:           & \_ABC                 & Incorretos:     & 123       \\
 
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Variáveis
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Variáveis}
 
 Variáveis são posições de memória com um nome, usadas para armazenar valores. Os valores armazenados podem ser modificados a qualquer momento.
@@ -378,7 +400,7 @@ long double value;
 \end{lstlisting}
 
 
-\item Variáveis podem ser:
+\item Variáveis podem ser
 \subitem Locais, quando declaradas dentro de uma função.
 \subitem Globais, quando declaradas fora de funções.
 \subitem Parâmetros, quando declaradas na lista de parâmetros da definição de uma função.
@@ -402,9 +424,10 @@ double p_dup = 2.0 * p;
 
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Constantes
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Constantes}
 
 Como variáveis, constantes são posições de memória que armazenam algum valor. Porém ao contrário de variáveis, o valor não pode ser modificado.
@@ -423,22 +446,26 @@ const float G = 6.67428E-11;
 const double h = 6.62606896E-34;
 \end{lstlisting}
 
+\item Alternativamente, há a palavra reservada \CONSTEXPR, que garante que o valor é definido em tempo de compilação. Isso é útil, por exemplo, para definir valores usados como um \CASE\ dentro do \SWITCH. Esta palavra está disponível a partir do padrão C23 e também no C++.
+
+{\tt constexpr \PLACEHOLDER{tipo de dados} \PLACEHOLDER{identificador} = \PLACEHOLDER{valor};}
+
 \end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Tipos de dados
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Tipos de dados}
 
-Em um computador digital, todo e qualquer dado é armazenado em forma de bits. O conteúdo de uma posição de memória pode ser interpretado como um número inteiro, real ou até mesmo uma string. Portanto, para que um dado seja interpretado corretamente, é necessário associar a esse dado o seu tipo. Na linguagem C os tipos mais importantes são:
+Em um computador digital, todo e qualquer dado é armazenado em forma de bits. O conteúdo de uma posição de memória pode ser interpretado como um número inteiro, real ou até mesmo uma string. Portanto, para que um dado seja interpretado corretamente, é necessário associar a esse dado o seu tipo. Na linguagem C os tipos mais importantes são
 
 \begin{itemize}
 \item {\tt int}: valor inteiro. Normalmente ocupa 4 bytes, sendo capaz de representar inteiros de -2147483648 a 2147483647.
 \item {\tt float}: valor real. Normalmente ocupa 4 bytes, sendo capaz de representar valores reais com cerca de 8 dígitos significativos.
 \item {\tt double}: valor real. Normalmente ocupa 8 bytes, sendo capaz de representar valores reais com cerca de 16 dígitos significativos.
 \item {\tt char}: valor inteiro pequeno ou caracter. Ocupa 1 byte, sendo capaz de representar inteiros de -128 a 127.
-\item {\tt bool}: valor lógico. Pode ser {\tt true} ou {\tt false}.
+\item {\tt bool}: valor lógico. Pode ser {\tt true} ou {\tt false}. Para usar o tipo \BOOL, é necessário incluir o arquivo de cabeçalho {\tt stdbool.h}. No padrão C23 e no C++, esse tipo se tornou palavra-chave e não é necessário incluir o cabeçalho.
 
 \item {\tt void}: tipo vazio. Usado para declarar funções que não retornam valor ou ponteiros sem tipo associado.
 \end{itemize}
@@ -467,11 +494,9 @@ int main(void)
 \end{lstlisting}
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Seção: Expressões numéricas
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Expressões numéricas}
 \label{sec:expr}
 
@@ -656,3 +681,176 @@ f = ~ 0;
 
 \end{itemize}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Diretivas de pré-processamento}
+
+Diretivas de pré-processamento são usadas pelo compilador para modificar o código-fonte antes de iniciar a compilação propriamente dita. São indicadas pelo símbolo {\tt \#}.
+
+\begin{itemize}
+
+\item Um exemplo já visto anteriormente é o \INCLUDE. A linha abaixo, antes da compilação, é substituída pelo conteúdo do arquivo de cabeçalho {\tt stdio.h}
+
+\begin{lstlisting}
+#include <stdio.h>
+\end{lstlisting}
+ 
+\item Outro exemplo é o \DEFINE, usado para definir macros. Macros são identificadores que são substituídos pela string que o sucede ao longo do código-fonte. No exemplo abaixo, a primeira linha define {\tt TAM\_MAX} como 10, portanto, antes da compilação, esse identificador será substituído por 10 na declaração de {\tt array}.
+
+{\tt \#define \PLACEHOLDER{identificador} \PLACEHOLDER{string}}
+
+\begin{lstlisting}
+#define TAM_MAX 10
+int array[TAM_MAX]
+\end{lstlisting}
+
+\item O identificador pode ser usado para definir macros com parâmetros, como no exemplo a seguir. Deve-se ter cuidado pois, como a substituição é puramente textual, o valor de {\tt x} pode não ser avaliado corretamente a depender da precedência dos operadores. Isso pode ser evitado com os parênteses ao redor {\tt x}, que garantem que seu valor é calculado antes da multiplicação.
+
+\begin{lstlisting}
+#define QUADRADO(x) ((x)*(x))
+printf("%d\n", QUADRADO(5+5));
+\end{lstlisting}
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercícios}
+
+\begin{enumerate}
+
+  \item Crie uma função \MAIN\ vazia.
+
+  \item Crie uma função \MAIN\ e dentro dela declare as seguintes variáveis:
+    \begin{enumerate}
+      \item um inteiro chamado {\tt n}.
+      \item um real de precisão simples chamado {\tt f}.
+      \item um real de precisão dupla chamado {\tt d}.
+      \item um caracter chamado {\tt c}.
+      \item um inteiro longo chamado {\tt l}.
+     \end{enumerate}
+          
+  \item Em C, as instruções devem ser terminadas com ponto e vírgula. A declaração de uma variável é o primeiro lugar do programa onde a variável aparece e é onde seu tipo de dados é definido. A inicialização é onde algum valor é atribuído a ela pela primeira vez. A declaração e inicialização podem ocorrer na mesma instrução. Por exemplo:
+%%%%%%%%%%
+\begin{lstlisting}
+	int i = 0;
+	float x = 5.2;
+	float y = x*x;
+\end{lstlisting}
+%%%%%%%%%%
+
+Crie uma função \MAIN\ e dentro dela declare e inicialize na mesma instrução:
+    \begin{enumerate}
+      \item um inteiro chamado {\tt val}.
+      \item um real de precisao simples chamado {\tt x}.
+      \item um real de precisão dupla chamado {\tt xd}.
+      \item um caracter chamado {\tt tiny}.
+      \item um inteiro longo chamado {\tt huge}.
+    \end{enumerate}
+
+  \item Crie uma função \MAIN\ que faz o mesmo que na questão anterior e em seguida, para cada variável, imprime uma mensagem com seu nome, a palavra "vale", e seu valor. Para uma variável chamada pipoca, por exemplo:
+
+	{\tt pipoca vale 3.141592}
+
+  \item Crie uma função \MAIN\ que faz o mesmo que na questão anterior, porém, ao invés de declarar variáveis, declare constantes.
+
+  \item Crie uma função \MAIN\ e dentro dela declare e inicialize na mesma instrução cinco variáveis inteiras. Para inicializá-las use expressões com três operadores aritméticos cada. Na mesma linha, coloque em um comentário o resultado da expressão. Por exemplo:
+%%%%%%%%%%
+\begin{lstlisting}
+	int i = 5 + 2 * 3 * 4; // 29
+\end{lstlisting}
+%%%%%%%%%%
+
+  \item Crie uma função \MAIN\ e dentro dela declare e inicialize na mesma instrução cinco variáveis inteiras. Para inicializá-las use expressões com cinco operadores aritméticos cada. Na mesma linha, coloque em um comentário o resultado da expressão.
+
+  \item Crie uma função \MAIN\ e dentro dela declare e inicialize na mesma instrução cinco variáveis reais de precisão dupla. Para inicializá-las use expressões com dois operadores aritméticos e uma chamada a função em cada expressão. Na mesma linha, coloque em um comentário o resultado da expressão.
+
+  \item Crie uma função \MAIN\ e dentro dela declare e inicialize na mesma instrução cinco variáveis reais de precisão simples. Para inicializá-las use expressões com três operadores aritméticos cada. Na mesma linha, coloque em um comentário o resultado da expressão.
+
+  \item Crie uma função \MAIN\ que imprime a mensagem \verb|"Hello\n"|.
+
+  \item Crie uma função \MAIN\ que imprime a mensagem \verb|"Hello\n"|, \\\verb|"Pressione Enter para continuar\n"|, e em seguida chama \verb|getchar()|.
+
+  \item O que acontece quando:
+    \begin{enumerate}
+      \item atribuímos um valor \INT\ a uma variável \FLOAT?
+      \item atribuímos um valor \FLOAT\ a uma variável \INT?
+    \end{enumerate}
+
+  \item Crie um programa que calcule e imprima a área das figuras planas especificadas. Para um paralelogramo com lados 10 e 4, com ângulo de 60 graus entre eles, por exemplo:
+%%%%%%%%%%
+\begin{lstlisting}
+float a = 10;
+float b = 4;
+float deg = 60;
+float h = b * sin(deg * M_PI / 180);
+float area = a * h;
+printf("area = %f\n", area);
+\end{lstlisting}
+%%%%%%%%%%
+
+    \begin{enumerate}
+      \item um retângulo com lados 3 e 6.
+      \item um quadrado com lado 5.
+      \item um triângulo retângulo com catetos 3 e 4.
+      \item um triângulo retângulo com cateto igual a 5 e hipotenusa igual a 13.
+      \item um triângulo equilátero com lado 4.
+      \item um círculo com raio 2.
+    \end{enumerate}
+
+  \item Crie um programa que calcule e imprima o volume dos sólidos especificados.
+    \begin{enumerate}
+      \item um cubo com aresta igual a 5.
+      \item um paralelepípedo com lados 3, 4 e 5.
+      \item um cilindro cuja base tem raio igual a 3 e altura igual a 4.
+      \item uma pirâmide com base quadrada de lado 5 e altura igual a 6.
+      \item uma esfera com raio igual a 1.
+      \item um prisma cuja base é um triângulo equilátero com lado igual a 2 e altura igual a 10.
+    \end{enumerate}
+
+  \item Considere um material com densidade de 0.420 g/cm$^3$. Crie um programa que calcule e imprima a massa em g e kg dos objetos descritos abaixo.
+    \begin{enumerate}
+      \item uma folha de 19 $\times$ 270 cm e espessura de 0.6 mm.
+      \item uma chapa de 210 $\times$ 82 cm e espessura de 3.5 cm.
+      \item uma ripa de 1 $\times$ 2 cm e comprimento de 1.2 m.
+      \item um sarrafo de 3.5 $\times$ 4 cm e comprimento de 3 m.
+      \item um caibro de 5 $\times$ 5 cm e comprimento de 3 m.
+      \item uma viga de 4 $\times$ 9 cm e comprimento de 4 m.
+      \item um tarugo com diâmetro de 15 mm e comprimento de 60 cm.
+    \end{enumerate}
+
+  \item Considere os vetores ${\bf v} = (2, 2, 0)$ e ${\bf w} = (3, -3, 0)$. Crie um programa que calcule e imprima
+    \begin{enumerate}
+      \item o vetor ${\bf v} + {\bf w}$.
+      \item o vetor ${\bf v} - {\bf w}$.
+      \item a norma de ${\bf v}$.
+      \item a norma de ${\bf w}$.
+      \item o coeficiente angular de ${\bf v}$, i.e. o ângulo formado entre o vetor e o eixo $x$.
+      \item o coeficiente angular de ${\bf w}$.
+      \item o produto escalar de ${\bf v}$ por ${\bf w}$.
+      \item o produto vetorial de ${\bf v}$ por ${\bf w}$.
+    \end{enumerate}
+
+  \item Considere a equação de segundo grau $x^2 - 3x - 10 = y$. Crie um programa que calcule e imprima
+    \begin{enumerate}
+      \item o valor de $\Delta = b^2 - 4ac$.
+      \item suas duas raízes reais, dadas por $x = (-b \pm \sqrt{\Delta}) / 2a$.
+      \item a coordenada $x$ do vértice, dada por $x = -b/2a$.
+      \item a coordenada $y$ do vértice, dada por $y = -\Delta/4a$.
+    \end{enumerate}
+
+  \item Sabendo que $\log_a b = \log b / \log a$, crie um programa que calcule e imprima
+    \begin{enumerate}
+      \item o valor de $\log_2 1024$.
+      \item o valor de $\log_3 729$.
+      \item o valor de $\log_4 256$.
+      \item o valor de $\log_5 625$.
+    \end{enumerate}
+
+  \item Crie um programa que imprima em uma tabela os valores de 0 a 100 graus Celsius em intervalos de 10 graus na primeira coluna. Na segunda coluna imprima os valores correspondentes em Kelvin e na terceira, os valores correspondentes em Fahrenheit. Seja $c$ o valor em Celsius, $k$ o valor em Kelvin e $f$ o valor em Fahrenheit, considere que $k = c + 273.15$ e $f = c \times 9 / 5 + 32$.
+
+\end{enumerate}

@@ -5,7 +5,6 @@
  */
 
 #include <stdio.h>
-#include <cstdlib>
 
 int main()
 {   
@@ -30,6 +29,4 @@ int main()
         }
         while (resto == 0);
     }
-
-    system("pause");
 }

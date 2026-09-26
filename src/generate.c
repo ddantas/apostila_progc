@@ -26,6 +26,9 @@ int main (int argc, char** argv)
 
   if (argc < 2)
   {
+    fprintf(stderr, "Error: Missing required parameter <n>.\n\n");
+    fprintf(stderr, "Usage: %s <n>\n", argv[0]);
+    fprintf(stderr, "  <n> : An integer value (e.g., 42)\n");
     exit(1);
   }
 

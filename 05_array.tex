@@ -2,19 +2,151 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Vetores}
+\chapter{Tipos de dados compostos}
+\label{chap:type}
 
-Vetores são sequências de valores do mesmo tipo referenciados por um mesmo nome. Um elemento específico da sequência é acessado por meio de um índice inteiro não negativo.
-
-Na linguagem C, os vetores começam com o índice zero. Um vetor com {\tt n} posições terá como índices válidos os inteiros de zero a {\tt n-1}.
+Nem todos os problemas podem ser resolvidos com variáveis simples como as primitivas já vistas. Bancos de dados requerem o uso de registros com campos diferentes para armazenar por exemplo o nome, endereço, estado civil etc de cada cliente. Problemas que envolvem matrizes, vetores, listas e sequências requerem o uso de estruturas indexadas, ou seja, que permitam acessar componentes individuais através de índices inteiros. Neste capítulo veremos como criar, modificar e consultar estruturas com tipos de dados compostos, que podem ser homogêneas, compostas por itens de mesmo tipo, ou heterogêneas, compostas por itens de tipos diferentes.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Vetores unidimensionais}
+\section{Estruturas compostas heterogêneas}
 
-Uma declaração de vetor tem o seguinte formato:
+As estruturas compostas heterogêneas são também chamadas de registros. São úteis na criação de bancos de dados e podem armazenar em conjunto dados numéricos e de texto. Abaixo está a sintaxe da criação de um tipo de dados de registro definido pelo usuário.
+
+\NEWLINE
+{\tt
+struct \PLACEHOLDER{novo tipo}\\
+\{\\
+\TAB  \PLACEHOLDER{tipo} \PLACEHOLDER{identificador};\\
+\TAB  \PLACEHOLDER{tipo} \PLACEHOLDER{identificador};\\
+\TAB  ...\\
+\}\\
+}
+\NEWLINE
+
+Abaixo está um exemplo de uso de \STRUCT. Neste exemplo a estrutura {\tt aluno} é definida e são inicializadas duas instâncias, {\tt a} e {\tt b}, de duas maneiras diferentes. Finalmente, seu conteúdo é impresso.
+
+\begin{lstlisting}
+struct aluno
+{
+  char nome[50];
+  char matricula[14];
+  short int nascDia;
+  short int nascMes;
+  short int nascAno;
+};
+
+int main(void)
+{
+  struct aluno a = {
+    .nome = "John Smith",
+    .matricula = "202600001010",
+    .nascDia = 31,
+    .nascMes = 1,
+    .nascAno = 2006,
+  };
+  struct aluno b = {"Johnson Smith", "202500002020", 1, 12, 2005};
+
+  printf("Nome:       %s\n", a.nome);
+  printf("Matricula:  %s\n", a.matricula);
+  printf("Nascimento: %02d/%02d/%d\n", a.nascDia, a.nascMes, a.nascAno);
+  printf("\n");
+  printf("Nome:       %s\n", b.nome);
+  printf("Matricula:  %s\n", b.matricula);
+  printf("Nascimento: %02d/%02d/%d\n", b.nascDia, b.nascMes, b.nascAno);
+}
+\end{lstlisting}
+
+Na prática, geralmente se usa \TYPEDEF\ para simplificar a declaração das variáveis. O \TYPEDEF\ cria um alias para um tipo de dados definido pelo usuário, evitando a necessidade da palavra struct a cada declaração de variável desse tipo. A data também pode ser agregada em um outro tipo para simplificar seu uso caso necessário o uso em outras partes do código. Abaixo está a sintaxe usada.
+\NEWLINE
+{\tt
+typedef struct\\
+\{\\
+\TAB  \PLACEHOLDER{tipo} \PLACEHOLDER{identificador};\\
+\TAB  \PLACEHOLDER{tipo} \PLACEHOLDER{identificador};\\
+\TAB  ...\\
+\} \PLACEHOLDER{novo tipo};\\
+} 
+\NEWLINE
+
+Abaixo está um exemplo que mostra como o código anterior pode ser modificado para usar \TYPEDEF, além de encapsular a data em um novo tipo.
+
+\begin{lstlisting}
+typedef struct
+{
+  short int dia;
+  short int mes;
+  short int ano;
+} data_t;
+
+typedef struct
+{
+  char nome[50];
+  char matricula[14];
+  data_t nasc;
+} aluno_t;
+
+int main(void)
+{
+  aluno_t a = {
+    .nome = "John Smith",
+    .matricula = "202600001010",
+    .nasc = {31, 1, 2006},
+  };
+  aluno_t b = {"Johnson Smith", "202500002020", 1, 12, 2005};
+
+  printf("Nome:       %s\n", a.nome);
+  printf("Matricula:  %s\n", a.matricula);
+  printf("Nascimento: %02d/%02d/%d\n", a.nasc.dia, a.nasc.mes, a.nasc.ano);
+  printf("\n");
+  printf("Nome:       %s\n", b.nome);
+  printf("Matricula:  %s\n", b.matricula);
+  printf("Nascimento: %02d/%02d/%d\n", b.nasc.dia, b.nasc.mes, b.nasc.ano);
+\end{lstlisting}
+
+Tipos criados com \STRUCT\ podem ser passados como parâmetro, retornados e até usados em atribuições, como no exemplo abaixo. Experimente como exercício copiar, modificar e exibir o conteúdo da instância que recebeu a cópia para observar como ela realmente armazena uma nova cópia e não é simplesmente uma referência à instância original.
+
+\begin{lstlisting}
+aluno_t alunoCopy(aluno_t src)
+{
+  aluno_t dst = src;
+  return dst;
+}
+
+void alunoPrint(aluno_t a)
+{
+  printf("Nome:       %s\n", a.nome);
+  printf("Matricula:  %s\n", a.matricula);
+  printf("Nascimento: %02d/%02d/%d\n", a.nascDia, a.nascMes, a.nascAno);
+}
+\end{lstlisting}
+
+Quando vários registros de mesmo tipo são necessários, podem ser armazenados como posições individuais em um vetor, como no exemplo abaixo. Observe que a inicialização agora não é mais feita exatamente como antes, sendo feita com um \textit{type cast}.
+
+\begin{lstlisting}
+  aluno_t arrAluno[10];
+
+  arrAluno[0] = (aluno_t){
+    .nome = "John Smith",
+    .matricula = "202600001010",
+    .nasc = {31, 1, 2006},
+  };
+  arrAluno[1] = (aluno_t){"Johnson Smith", "202500002020", 1, 12, 2005};
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Estruturas compostas homogêneas}
+
+As estruturas compostas homogêneas são chamadas \textit{arrays} e são usadas para representar vetores e matrizes. Vetores são representados por \textit{arrays} unidimensionais e matrizes por \textit{arrays} bidimensionais. O número de dimensões de um \textit{array} é dado pelo número de índices usados para acessar uma posição. Também é possível se necessário ter mais dimensões. O número de posições possíveis de cada dimensão é seu tamanho.
+
+Um vetor com três coordenadas é então representado por um \textit{array} com uma dimensão de tamanho três. Uma matriz com três linhas e quatro colunas é representada por um \textit{array} bidimensional com dimensões de tamanho três e quatro
+
+\textit{Arrays} são sequências de valores do mesmo tipo referenciados por um mesmo nome. Um elemento específico da sequência é acessado por meio de um índice inteiro não negativo. Na linguagem C, os \textit{arrays} começam com o índice zero. Um \textit{array} com {\tt n} posições terá como índices válidos os inteiros de zero a {\tt n-1}.
+
+Uma declaração de \textit{array} tem o seguinte formato:
 
 \NEWLINE
 {\tt
@@ -30,7 +162,7 @@ A expressão elementar abaixo funciona como uma variável comum, podendo ser usa
 }
 \NEWLINE
 
-Uma atribuição de valor a uma certa posição do vetor, por exemplo, tem o seguinte formato:
+Uma atribuição de valor a uma certa posição do \textit{array}, por exemplo, tem o seguinte formato:
 
 \NEWLINE
 {\tt
@@ -39,12 +171,7 @@ Uma atribuição de valor a uma certa posição do vetor, por exemplo, tem o seg
 \NEWLINE
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Matrizes}
-
-Uma matriz é um vetor bidimensional. Sua declaração é semelhante à de um vetor unidimensional.
+Uma matriz é um \textit{array} bidimensional. Sua declaração é semelhante à de um vetor unidimensional.
 
 \NEWLINE
 {\tt

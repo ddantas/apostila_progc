@@ -681,6 +681,26 @@ f = ~ 0;
 
 \end{itemize}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\emph{Type cast}}
+
+A linguagem C usa os tipos dos operandos para definir o tipo do resultado. Por isso, na operação abaixo, o resultado obtido é zero, mesmo sendo a variável {\tt result} de tipo \FLOAT.
+
+\begin{lstlisting}
+  int num = 1;
+  int den = 3;
+  float result = num / den;
+  printf("float = %f\n", result);
+\end{lstlisting}
+
+Para evitar isso, podemos fazer um \textit{type cast} dos operandos para \FLOAT, forçando o resultado a ser também de tipo \FLOAT. A sintaxe do \textit{type cast} é colocar o tipo entre parênteses antes da variável a ser modificada como no exemplo anaixo.
+
+\begin{lstlisting}
+  float result = (float)num / (float)den;
+\end{lstlisting}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
